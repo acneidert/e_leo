@@ -1,7 +1,7 @@
 import FormDefault from '../../components/CRUD/FormDefault';
 import { Input } from '../../components/Inputs.njs';
 
-class AddAnoLeoistico extends FormDefault {
+class FormAnoLeoistico extends FormDefault {
   id = 0;
   ano = '';
   presidente = '';
@@ -23,4 +23,4 @@ class AddAnoLeoistico extends FormDefault {
   }
 }
 
-export default AddAnoLeoistico;
+export default FormAnoLeoistico;

@@ -10,21 +10,21 @@ import Login from './pages/auth/Login';
 import Admin from './pages/Admin';
 import Error from './Error';
 
-import AddUser from './pages/user/AddUser';
+import FormUser from './pages/user/FormUser';
 import Dashboard from './pages/dashboard/Dashboard.njs';
 import ListUsers from './pages/user/ListUsers.njs';
 import { Loading } from './components/Loading.njs';
-import AddAnoLeoistico from './pages/ano_leoistico/AddAnoLeoistico.njs';
+import FormAnoLeoistico from './pages/ano_leoistico/FormAnoLeoistico.njs';
 import ListAnoLeoistico from './pages/ano_leoistico/ListAnoLeoistico.njs';
 import ListFundosFinanceiros from './pages/fundos_financeiros/ListFundosFinanceiros.njs';
-import AddFundosFinanceiros from './pages/fundos_financeiros/AddFundosFinanceiros.njs';
+import FormFundosFinanceiros from './pages/fundos_financeiros/FormFundosFinanceiros.njs';
 import ListStatusCampanha from './pages/status_campanha/ListStatusCampanha.njs';
-import AddStatusCampanha from './pages/status_campanha/AddStatusCampanha.njs';
+import FormStatusCampanha from './pages/status_campanha/FormStatusCampanha.njs';
 import ListStatusTarefas from './pages/status_tarefas/ListStatusTarefas.njs';
-import AddStatusTarefas from './pages/status_tarefas/AddStatusTarefas.njs';
+import FormStatusTarefas from './pages/status_tarefas/FormStatusTarefas.njs';
 import Test from './pages/Test.njs';
 import ListReuniao from './pages/reuniao/ListReuniao.njs';
-import AddReuniao from './pages/reuniao/AddReuniao.njs';
+import FormReuniao from './pages/reuniao/FormReuniao.njs';
 import ListCampanha from './pages/campanhas/ListCampanha.njs';
 import FormCampanha from './pages/campanhas/FormCampanha.njs';
 
@@ -151,28 +151,28 @@ class Application extends Nullstack {
           <Dashboard route="/" />
 
           <ListUsers route="/user" />
-          <AddUser route="/user/add/" />
-          <AddUser route="/user/edit/:id" />
+          <FormUser route="/user/add/" />
+          <FormUser route="/user/edit/:id" />
 
           <ListAnoLeoistico route="/ano_leoistico" />
-          <AddAnoLeoistico route="/ano_leoistico/add" />
-          <AddAnoLeoistico route="/ano_leoistico/edit/:id" />
+          <FormAnoLeoistico route="/ano_leoistico/add" />
+          <FormAnoLeoistico route="/ano_leoistico/edit/:id" />
 
           <ListFundosFinanceiros route="/fundos_financeiros" />
-          <AddFundosFinanceiros route="/fundos_financeiros/add" />
-          <AddFundosFinanceiros route="/fundos_financeiros/edit/:id" />
+          <FormFundosFinanceiros route="/fundos_financeiros/add" />
+          <FormFundosFinanceiros route="/fundos_financeiros/edit/:id" />
 
           <ListStatusCampanha route="/status_campanha" />
-          <AddStatusCampanha route="/status_campanha/add" />
-          <AddStatusCampanha route="/status_campanha/edit/:id" />
+          <FormStatusCampanha route="/status_campanha/add" />
+          <FormStatusCampanha route="/status_campanha/edit/:id" />
 
           <ListStatusTarefas route="/status_tarefas" />
-          <AddStatusTarefas route="/status_tarefas/add" />
-          <AddStatusCampanha route="/status_tarefas/edit/:id" />
+          <FormStatusTarefas route="/status_tarefas/add" />
+          <FormStatusTarefas route="/status_tarefas/edit/:id" />
 
           <ListReuniao route="/reuniao" />
-          <AddReuniao route="/reuniao/add" />
-          <AddReuniao route="/reuniao/edit/:id" />
+          <FormReuniao route="/reuniao/add" />
+          <FormReuniao route="/reuniao/edit/:id" />
 
           <ListCampanha route="/campanha"/>
           <FormCampanha route="/campanha/add"/>

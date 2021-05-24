@@ -1,7 +1,7 @@
 import FormDefault from '../../components/CRUD/FormDefault';
 import { Input } from '../../components/Inputs.njs';
 
-class AddFundosFinanceiros extends FormDefault {
+class FormFundosFinanceiros extends FormDefault {
   descricao = '';
   cor = '';
   icone = '';
@@ -20,4 +20,4 @@ class AddFundosFinanceiros extends FormDefault {
   }
 }
 
-export default AddFundosFinanceiros;
+export default FormFundosFinanceiros;

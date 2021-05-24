@@ -1,6 +1,6 @@
 import Nullstack from 'nullstack';
 
-class AddUser extends Nullstack {
+class FormUser extends Nullstack {
   id = 0;
   name = '';
   email = '';
@@ -274,4 +274,4 @@ class AddUser extends Nullstack {
   }
 }
 
-export default AddUser;
+export default FormUser;

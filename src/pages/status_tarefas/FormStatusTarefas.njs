@@ -1,14 +1,14 @@
 import FormDefault from '../../components/CRUD/FormDefault';
 import { Input } from '../../components/Inputs.njs';
 
-class AddStatusCampanha extends FormDefault {
+class FormStatusTarefas extends FormDefault {
   id = 0;
   descricao = '';
   cor = '';
   icone = '';
   ordem = '';
-  model = 'status_campanha';
-  form_description = 'Status de Campanha';
+  model = 'status_tarefas';
+  form_description = 'Status de Tarefas';
   render() {
     return (
       <Form>
@@ -21,4 +21,4 @@ class AddStatusCampanha extends FormDefault {
   }
 }
 
-export default AddStatusCampanha;
+export default FormStatusTarefas;

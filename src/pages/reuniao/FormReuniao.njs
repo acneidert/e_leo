@@ -2,7 +2,7 @@ import FormDefault from '../../components/CRUD/FormDefault';
 import DatePicker from '../../components/DatePicker.njs';
 import { Input, Checkbox } from '../../components/Inputs.njs';
 
-class AddReuniao extends FormDefault {
+class FormReuniao extends FormDefault {
   id = 0;
   data = '';
   is_ordinaria = true;
@@ -20,4 +20,4 @@ class AddReuniao extends FormDefault {
   }
 }
 
-export default AddReuniao;
+export default FormReuniao;
