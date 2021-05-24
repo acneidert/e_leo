@@ -1,0 +1,9 @@
+.notifications {
+    z-index: 999;
+    display: block;
+    position: absolute;
+    margin: 10px;
+    float:left;
+    right: 10px;
+    z-index: 99999 !important;
+}

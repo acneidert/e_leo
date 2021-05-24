@@ -1,0 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans+Condensed&display=swap');
+
+body {
+  font-family: 'Open Sans Condensed', sans-serif !important;
+}
+
+// body {
+//   overflow-y: hidden; /* Hide vertical scrollbar */
+//   overflow-x: hidden; /* Hide horizontal scrollbar */
+// }
+
+$theme-colors: (
+  'primary': #3a94e0,
+  //   "secondary":  $secondary,
+  //   "success":    $success,
+  //   "info":       $info,
+  //   "warning":    $warning,
+  //   "danger":     $danger,
+  //   "light":      $light,
+  //   "dark":       $dark,
+);
+
+.main-panel {
+  .content {
+    margin-top: 20px !important;
+  }
+}
+
+.btn {
+  i {
+    font-size: 1.2rem;
+  }
+}
+
+.dropdown-item {
+  &.active {
+    background-color: #9c27b0 !important;
+    color: #ffffff !important;
+  }
+}

@@ -1,0 +1,35 @@
+.search-modal {
+  .modal-content {
+    background-color: rgba(255, 255, 255, 0) !important;
+    box-shadow: none !important;
+    border: none !important;
+  }
+}
+.table {
+  tbody {
+    tr {
+        // background-color: hotpink;
+      .date {
+        &:hover {
+          cursor: pointer;
+          color: rgb(0, 0, 0) !important;
+          font-weight: bold;
+
+        }
+      }
+        .active {
+          div {
+            margin: auto;
+            width: 25px;
+            background-color: grey;
+            border-radius: 50%;
+            color: white;
+            text-align: center;
+          }
+      }
+    }
+  }
+}
+
+
+

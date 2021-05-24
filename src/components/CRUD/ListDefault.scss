@@ -1,0 +1,12 @@
+.table{
+    tbody, thead{
+        tr{
+            td{
+                padding: 0px !important;
+                .btn-group{
+                    margin: 2px 1px !important;
+                }
+            }
+        }
+    }
+}
