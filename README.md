@@ -1,5 +1,5 @@
 # E-LEO
-LEO Clube Managment
+LEO Clube Management
 
 
 
