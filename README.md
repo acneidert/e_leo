@@ -1,6 +1,7 @@
-# Eleo
+# E-LEO
+LEO Clube Managment
 
-<img src='https://raw.githubusercontent.com/nullstack/nullstack/master/nullstack.png' height='60' alt='Nullstack' />
+
 
 ## How to run this Project
 
@@ -15,6 +16,12 @@ NULLSTACK_PROJECT_NAME="[dev] Eleo"
 NULLSTACK_PROJECT_DOMAIN="localhost"
 NULLSTACK_PROJECT_COLOR="#D22365"
 NULLSTACK_SERVER_PORT="5000"
+NULLSTACK_SECRETS_DATABASE = eleo
+NULLSTACK_SECRETS_DBUSER = "eleo"
+NULLSTACK_SECRETS_DBPASS = "eleo"
+NULLSTACK_SECRETS_DBHOST = "localhost"
+NULLSTACK_SECRETS_DBDRIVER = "mysql"
+NULLSTACK_SECRETS_DBMODULE = "mysql"
 ```
 
 Run the app in development mode:
@@ -23,6 +30,4 @@ Run the app in development mode:
 
 Open [http://localhost:5000](http://localhost:5000) to view it in the browser.
 
-## Learn more about Nullstack
-
-[Read the documentation](https://nullstack.app/documentation)
+Made with [Nullstack](https://nullstack.app/)
