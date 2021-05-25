@@ -1,5 +1,5 @@
 import FormDefault from '../../components/CRUD/FormDefault';
-import { Input } from '../../components/Inputs.njs';
+import { Input } from '../../components/Inputs/Input.njs';
 
 class FormFundosFinanceiros extends FormDefault {
   descricao = '';

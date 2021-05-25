@@ -1,7 +1,7 @@
 import Nullstack from 'nullstack';
-import { CardDefault } from '../CardDefault.njs';
-import Pagination from '../Pagination.njs';
-import Table from '../Table.njs';
+import { CardDefault } from '../Card/CardDefault.njs';
+import Pagination from '../Pagination/Pagination.njs';
+import Table from '../Table/Table.njs';
 import { paginate } from '../../util/paginate';
 import { queryBuilder } from '../../util/queryBuilder';
 import { queryRelated } from '../../util/queryRelated';
@@ -14,14 +14,16 @@ import {
 import './ListDefault.scss';
 
 class ListDefault extends Nullstack {
+  /*Podem ser alterador*/
   model = '';
   table_description = '';
   related = []
   columns = [];
   data = [];
   total = 0;
+  link_add = undefined
 
-  /**/
+  /*Evitar ser Alterado*/
   pagination = null;
   search = null;
 
@@ -80,12 +82,12 @@ class ListDefault extends Nullstack {
   }
 
   getLinkAdd() {
-    if (typeof this.link_add === 'undefined') return `${this.model}/add`;
+    if (typeof this.link_add === 'undefined') return `/${this.model}/add`;
     return this.link_add;
   }
 
   getLinkEdit() {
-    if (typeof this.link_edit === 'undefined') return `${this.model}/edit`;
+    if (typeof this.link_edit === 'undefined') return `/${this.model}/edit`;
     return this.link_add;
   }
 

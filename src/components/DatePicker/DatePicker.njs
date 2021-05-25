@@ -1,10 +1,10 @@
 import Nullstack from 'nullstack';
-import uuidv4 from '../util/uuidv4';
+import uuidv4 from '../../util/uuidv4';
 import dateUtil from 'date-and-time';
 
 import mask from 'vanilla-text-mask';
 import './DatePicker.scss';
-import { dateMask } from '../util/mask';
+import { dateMask } from '../../util/mask';
 
 function formatNumber(dateOrMonth) {
   return `0${dateOrMonth}`.slice(-2);
@@ -362,7 +362,7 @@ class DatePicker extends Nullstack {
                       </div>
                     </div>
                   </div>
-
+                  <div class="table-responsive text-nowrap">
                   <table class="table">
                     <thead>
                       <tr>
@@ -393,6 +393,8 @@ class DatePicker extends Nullstack {
                       ))}
                     </tbody>
                   </table>
+                  </div>
+
                 </div>
                 <div class="card-footer">
                   <button

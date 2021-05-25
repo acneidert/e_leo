@@ -13,7 +13,7 @@ import Error from './Error';
 import FormUser from './pages/user/FormUser';
 import Dashboard from './pages/dashboard/Dashboard.njs';
 import ListUsers from './pages/user/ListUsers.njs';
-import { Loading } from './components/Loading.njs';
+import { Loading } from './components/Loading/Loading.njs';
 import FormAnoLeoistico from './pages/ano_leoistico/FormAnoLeoistico.njs';
 import ListAnoLeoistico from './pages/ano_leoistico/ListAnoLeoistico.njs';
 import ListFundosFinanceiros from './pages/fundos_financeiros/ListFundosFinanceiros.njs';

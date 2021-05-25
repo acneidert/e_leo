@@ -1,6 +1,6 @@
 import FormDefault from '../../components/CRUD/FormDefault';
-import DatePicker from '../../components/DatePicker.njs';
-import { Input, Checkbox } from '../../components/Inputs.njs';
+import DatePicker from '../../components/DatePicker/DatePicker.njs';
+import { Checkbox } from '../../components/Inputs/Checkbox.njs';
 
 class FormReuniao extends FormDefault {
   id = 0;

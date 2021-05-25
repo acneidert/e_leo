@@ -1,4 +1,10 @@
-export function CardDefault({ title = '', link_add = '', children, footer=(<></>) }) {
+export function CardDefault({
+  title = '',
+  link_add = '',
+  link_back = '',
+  children,
+  footer = <></>,
+}) {
   return (
     <div class="card">
       <div class="card-header card-header-primary">
@@ -10,14 +16,24 @@ export function CardDefault({ title = '', link_add = '', children, footer=(<></>
             {link_add !== '' && (
               <div class="float-right">
                 <a class="btn btn-primary btn-sm" href={link_add}>
-                  +
+                  + Adicionar
+                </a>
+              </div>
+            )}
+            {link_back !== '' && (
+              <div class="float-right">
+                <a class="btn btn-primary btn-sm" href={link_back}>
+                  ← Voltar
                 </a>
               </div>
             )}
           </div>
         </div>
       </div>
-      <div class="card-body">{children}{footer}</div>
+      <div class="card-body">
+        {children}
+        {footer}
+      </div>
       {footer !== null && <div class="card-footer"></div>}
     </div>
   );

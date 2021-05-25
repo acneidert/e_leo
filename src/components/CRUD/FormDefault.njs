@@ -1,11 +1,12 @@
 import Nullstack from 'nullstack';
 import toParam from '../../util/toParam';
-import { CardDefault } from '../CardDefault.njs';
+import { CardDefault } from '../Card/CardDefault.njs';
 import _ from 'lodash';
 
 class FormDefault extends Nullstack {
   model = '';
   form_description = '';
+  link_list = undefined
 
   async initiate({ params }) {
     const ret = await this.getById({ id: params.id, model: this.model });
@@ -41,6 +42,10 @@ class FormDefault extends Nullstack {
     }
   }
 
+  getLinkList() {
+    if (typeof this.link_list === 'undefined') return `/${this.model}`;
+    return this.link_list;
+  }
   static async save({ database, model, value }) {
     return await database.models[model].upsert(value);
   }
@@ -51,7 +56,7 @@ class FormDefault extends Nullstack {
 
   renderForm({ children }) {
     return (
-      <CardDefault title={`${this.getModoInfi()} ${this.form_description}`}>
+      <CardDefault title={`${this.getModoInfi()} ${this.form_description}`} link_back={this.getLinkList()}>
         <form onsubmit={this.handleSubmit}>
           <div class="form-row">{children}</div>
           <button type="submit" class="btn btn-primary">

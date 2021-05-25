@@ -1,5 +1,5 @@
 import Nullstack from 'nullstack';
-import { Input } from '../../components/Inputs.njs';
+import { Input } from '../../components/Inputs/Input.njs';
 import './Login.scss';
 class Login extends Nullstack {
   username = 'admin';

@@ -1,12 +1,12 @@
 import Nullstack from 'nullstack';
 import { paginate } from '../../util/paginate';
 import { queryBuilder } from '../../util/queryBuilder';
-import { Input } from '../Inputs.njs';
-import Pagination from '../Pagination.njs';
+import { Input } from '../Inputs/Input.njs';
+import Pagination from '../Pagination/Pagination.njs';
 import './SelectDefault.scss';
 
 class SelectDefault extends Nullstack {
-  /* Podem Ser Alterado Pelo*/
+  /* Podem Ser Alterado*/
   model = null;
   columns = [];
   data = [];
@@ -45,7 +45,7 @@ class SelectDefault extends Nullstack {
     });
   }
 
-  handleSearch({ event } ) {
+  handleSearch({ event }) {
     clearTimeout(this.timer_search);
     this.timer_search = setTimeout(() => {
       this.getRows();
@@ -154,35 +154,37 @@ class SelectDefault extends Nullstack {
                   </div>
                 </div>
                 <div class="card-body">
-                  <table class="table table-bordered table-sm table-hover">
-                    <thead>
-                      <tr>
-                        {this.columns.map((column) => (
-                          <th>{column.header}</th>
-                        ))}
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {this.data.map((dataRow) => {
-                        return (
-                          <tr
-                            onclick={this.setValue}
-                            data-value={dataRow[related_field]}
-                            data-display={dataRow[display_field]}
-                            class={
-                              this.selected_value === dataRow[related_field]
-                                ? 'table-primary'
-                                : ''
-                            }
-                          >
-                            {this.columns.map((column) => (
-                              <td> {dataRow[column.name]}</td>
-                            ))}
-                          </tr>
-                        );
-                      })}
-                    </tbody>
-                  </table>
+                  <div class="table-responsive text-nowrap">
+                    <table class="table table-bordered table-sm table-hover">
+                      <thead>
+                        <tr>
+                          {this.columns.map((column) => (
+                            <th>{column.header}</th>
+                          ))}
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {this.data.map((dataRow) => {
+                          return (
+                            <tr
+                              onclick={this.setValue}
+                              data-value={dataRow[related_field]}
+                              data-display={dataRow[display_field]}
+                              class={
+                                this.selected_value === dataRow[related_field]
+                                  ? 'table-primary'
+                                  : ''
+                              }
+                            >
+                              {this.columns.map((column) => (
+                                <td> {dataRow[column.name]}</td>
+                              ))}
+                            </tr>
+                          );
+                        })}
+                      </tbody>
+                    </table>
+                  </div>
                   <Pagination
                     pageSize={10}
                     total={this.total}
@@ -199,6 +201,12 @@ class SelectDefault extends Nullstack {
                   >
                     Limpar
                   </button>
+                  {/* <button
+                    type="button"
+                    class="btn btn-secondary"
+                  >
+                    Adicionar
+                  </button> */}
                   <button
                     type="button"
                     class="btn btn-primary"

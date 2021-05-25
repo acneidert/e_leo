@@ -1,8 +1,8 @@
 import Nullstack from 'nullstack';
 import SelectDefault from '../components/CRUD/SelectDefault.njs';
-import DatePicker from '../components/DatePicker.njs';
-import { FilePicker } from '../components/Inputs.njs';
-import Pagination from '../components/Pagination.njs';
+import DatePicker from '../components/DatePicker/DatePicker.njs';
+import { FilePicker } from '../components/Inputs/FilePicker.njs';
+import Pagination from '../components/Pagination/Pagination.njs';
 
 class Test extends Nullstack {
   // search_description='Ano Leoístico'

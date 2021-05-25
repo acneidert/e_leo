@@ -1,6 +1,6 @@
 import FormDefault from '../../components/CRUD/FormDefault.njs';
-import DatePicker from '../../components/DatePicker.njs';
-import { Input } from '../../components/Inputs.njs';
+import DatePicker from '../../components/DatePicker/DatePicker.njs';
+import { Input } from '../../components/Inputs/Input.njs';
 import SelectStatusCampanha from '../status_campanha/SelectStatusCampanha.njs';
 
 class FormCampanha extends FormDefault {
