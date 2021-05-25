@@ -4,6 +4,8 @@ import Pagination from '../Pagination.njs';
 import Table from '../Table.njs';
 import { paginate } from '../../util/paginate';
 import { queryBuilder } from '../../util/queryBuilder';
+import { queryRelated } from '../../util/queryRelated';
+
 import {
   DeleteButton,
   EditButton,
@@ -14,6 +16,7 @@ import './ListDefault.scss';
 class ListDefault extends Nullstack {
   model = '';
   table_description = '';
+  related = []
   columns = [];
   data = [];
   total = 0;
@@ -22,8 +25,9 @@ class ListDefault extends Nullstack {
   pagination = null;
   search = null;
 
-  static async getAll({ database, model, pagination = null, search = null }) {
+  static async getAll({ database, model, pagination = null, search = null, related = null }) {
     return await database.models[model].findAndCountAll({
+      ...queryRelated({related, database}),
       ...queryBuilder(search),
       ...paginate(pagination),
     });
@@ -53,14 +57,14 @@ class ListDefault extends Nullstack {
     this.data = [];
     const obj = await this.getAll({
       model: this.model,
-      pagination: this.pagination,
+      related: this.related,
       search: {
         query: this.search,
         cols: this.buildSearch(),
       },
+      pagination: this.pagination,
     });
     const { count, rows } = obj;
-    // console.log(rows)
     this.total = count;
     this.data = rows;
   }
@@ -85,19 +89,21 @@ class ListDefault extends Nullstack {
     return this.link_add;
   }
 
-  actionsButtons({ value }) {
+  actionsButtons({ value, class: klass }) {
     return (
-      <div class="btn-group">
-        <EditButton id={value} link={this.getLinkEdit()} />
-        <DeleteButton id={value} click={this.handleDelete} />
-      </div>
+      <td class={klass}>   
+        <div class="btn-group">
+          <EditButton id={value} link={this.getLinkEdit()} />
+          <DeleteButton id={value} click={this.handleDelete} />
+        </div>
+      </td>
     );
   }
   rendererData({ value }) {
     try {
-      return value.toLocaleDateString('pt-BR', { timeZone: 'UTC' });
+      return <td>{value.toLocaleDateString('pt-BR', { timeZone: 'UTC' })}</td>;
     } catch (e) {
-      return value;
+      return <td>{value}</td>;
     }
   }
 

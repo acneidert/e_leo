@@ -4,16 +4,15 @@ import { CardDefault } from '../CardDefault.njs';
 import _ from 'lodash';
 
 class FormDefault extends Nullstack {
-  
-    model = ''
-    form_description = ''
+  model = '';
+  form_description = '';
 
-  
   async initiate({ params }) {
     const ret = await this.getById({ id: params.id, model: this.model });
     if (ret) {
       _.forOwn(ret.dataValues, (value, key) => {
-          _.set(this, key, value);
+        // Just get Class values
+        if (_.has(this, key)) _.set(this, key, value);
       });
     }
   }
@@ -26,7 +25,10 @@ class FormDefault extends Nullstack {
   }
 
   async handleSubmit({ instances }) {
-    const [newObj, created] = await this.save({ value: toParam({ ...this }), model: this.model });
+    const [newObj, created] = await this.save({
+      value: toParam({ ...this }),
+      model: this.model,
+    });
     if (created === null) {
       instances.notification.newError({
         message: `Erro ao ${this.getModoInfi()} ${this.form_description}`,
@@ -47,13 +49,11 @@ class FormDefault extends Nullstack {
     return await database.models[model].findOne({ where: { id: id } });
   }
 
-  renderForm({children}) {
+  renderForm({ children }) {
     return (
       <CardDefault title={`${this.getModoInfi()} ${this.form_description}`}>
         <form onsubmit={this.handleSubmit}>
-          <div class="form-row">
-            {children}
-          </div>
+          <div class="form-row">{children}</div>
           <button type="submit" class="btn btn-primary">
             Salvar
           </button>

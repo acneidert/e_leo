@@ -15,6 +15,7 @@ class FormCampanha extends FormDefault {
   data_fim = '';
   objetivo = '';
   statusCampanhaId = '';
+  
   render() {
     return (
       <Form>

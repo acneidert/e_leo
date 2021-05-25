@@ -1,10 +1,11 @@
 import Nullstack from 'nullstack';
+import _ from 'lodash'; 
 
 class Table extends Nullstack {
-  displayData({ value, renderer = null, reference = '', instances }) {
-    if (typeof renderer !== 'string') return value;
-    if (reference === '') return value;
-    return instances[reference][renderer]({ value });
+  displayData({ value, row, renderer = null, reference = '', instances, class: klass = '' }) {
+    if (typeof renderer !== 'string') return <td class={klass}>{value}</td>;
+    if (reference === '') return <td class={klass}>{value}</td>;
+    return instances[reference][renderer]({ value, row, class: klass });
   }
 
   render({ columns = [], data = [], reference = '' }) {
@@ -21,13 +22,15 @@ class Table extends Nullstack {
           {data.map((dataRow) => (
             <tr>
               {columns.map((column) => (
-                <td class={column.class}>
-                  {this.displayData({
-                    value: dataRow[column.name],
+                <>
+                {this.displayData({
+                    value: _.get(dataRow, column.name),
+                    row: dataRow,
                     renderer: column.renderer,
                     reference: reference,
+                    class: column.class,
                   })}
-                </td>
+                  </>
               ))}
             </tr>
           ))}

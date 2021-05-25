@@ -7,16 +7,14 @@ class Pagination extends Nullstack {
   initiate({ pageSize = 20 }) {
     this.pageSize = pageSize;
   }
-  hydrate() {
-    this.setPagination();
-  }
 
   handlePageSize() {
     this.page = 1;
     this.setPagination();
   }
 
-  setPagination({ onchange }) {
+  setPagination({ event, onchange }) {
+    // console.log(event)
     const value = {
       page: this.page,
       pageSize: this.pageSize,

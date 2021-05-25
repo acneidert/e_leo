@@ -7,6 +7,11 @@ export function Input({
   bind,
   disabled = false,
   class: klass,
+  onchange,
+  oninput,
+  onkeydown,
+  onkeyup,
+  onkeypress,
 }) {
   const idUuidv4 = uuidv4();
   const nameId = name.toLocaleLowerCase();
@@ -24,6 +29,11 @@ export function Input({
         source={source}
         disabled={disabled}
         id={id}
+        onchange={onchange}
+        oninput={oninput}
+        onkeydown={onkeydown}
+        onkeyup={onkeyup}
+        onkeypress={onkeypress}
       />
     </div>
   );
@@ -36,6 +46,7 @@ export function Checkbox({
   source,
   bind,
   disabled = false,
+  
 }) {
   const idUuidv4 = uuidv4();
   const nameId = name.toLocaleLowerCase();

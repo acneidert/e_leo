@@ -2,6 +2,9 @@ import ListDefault from '../../components/CRUD/ListDefault.njs';
 
 class ListCampanha extends ListDefault {
   model = 'campanha';
+  related = [
+    { model: 'status_campanha' }
+  ]
   table_description = 'Campanhas';
   columns = [
     {
@@ -16,7 +19,7 @@ class ListCampanha extends ListDefault {
     { header: 'Início', name: 'data_inicio', renderer: 'rendererData' },
     { header: 'Fim', name: 'data_fim', renderer: 'rendererData' },
     { header: 'Objetivo', name: 'objetivo' },
-    { header: 'Status', name: 'status' },
+    { header: 'Status', name: 'status_campanha.descricao' },
   ];
 }
 

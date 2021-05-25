@@ -14,6 +14,7 @@ class SelectDefault extends Nullstack {
   search_description = '';
 
   /*Evitar de Ser alterado*/
+  timer_search = null;
   search = null;
   selected_description = '';
   selected_value = '';
@@ -44,7 +45,31 @@ class SelectDefault extends Nullstack {
     });
   }
 
-  async getRows() {
+  handleSearch({ event, value } ) {
+    /* TODO: prevent submit on enter Key */
+    console.log(event)
+    clearTimeout(this.timer_search);
+    this.timer_search = setTimeout(() => {
+      this.getRows();
+    }, 1000);
+
+    if (event && event.keyCode === 13) {
+      event.preventDefault();
+      clearTimeout(this.timer_search);
+      this.getRows();
+      return false;
+    }
+    return true;
+  }
+
+  terminate() {
+    clearTimeout(this.timer_search);
+  }
+
+  async getRows({ event }) {
+    var ischange = false;
+    if (event && event.type === 'change') ischange = true;
+
     if (this.model !== null) {
       const obj = await this.getAll({
         model: this.model,
@@ -60,6 +85,7 @@ class SelectDefault extends Nullstack {
         this.data = rows;
       }
     }
+    // (onchange && onchange({onchange}))
   }
 
   static async getById({ id, model, database }) {
@@ -120,11 +146,16 @@ class SelectDefault extends Nullstack {
                       <p class="card-category">Clique para selecionar</p>
                     </div>
                     <div class="col-md-8 float-right">
-                      <form onsubmit={this.getRows}>
+                      {/* <form onsubmit={this.getRows}> */}
                       <div class="form-row">
-                        <Input name="Buscar" bind={this.search} />
-                        </div>
-                      </form>
+                        <Input
+                          name="Buscar"
+                          bind={this.search}
+                          // onchange={this.handleSearch}
+                          oninput={this.handleSearch}
+                        />
+                      </div>
+                      {/* </form> */}
                     </div>
                   </div>
                 </div>

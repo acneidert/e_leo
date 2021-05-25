@@ -135,7 +135,7 @@ class Application extends Nullstack {
   }
   render({ me, worker, page }) {
     return (
-      <main class={page.isDark ? 'dark-edition' : ''}>
+      <main class={page.isDark ? 'dark-edition' : 'light-edition'}>
         <Head />
         <Footer />
         <Notification key="notification" />
