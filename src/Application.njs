@@ -125,7 +125,6 @@ class Application extends Nullstack {
         <script src="/assets/js/plugins/chartist.min.js"></script>
         <script src="/assets/js/plugins/bootstrap-notify.js"></script>
         <script src="/assets/js/material-dashboard.js?v=2.1.0"></script>
-        {/* <script src="/assets/demo/demo.js"></script> */}
         {/* <script src="https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.1.4/dist/js/datepicker-full.min.js"></script> */}
 
         {/* <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js" integrity="sha512-T/tUfKSV1bihCnd+MxKD0Hm1uBBroVYBOYSk1knyvQ9VyZJpc/ALb4P0r6ubwVPSGB2GvjeoMAJJImBG12TiaQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> */}
@@ -179,7 +178,7 @@ class Application extends Nullstack {
           <FormCampanha route="/campanha/edit/:id"/>
         </Admin>
         {/* )} */}
-        <Error route="*" />
+        {/* <Error route="*" /> */}
       </main>
     );
   }

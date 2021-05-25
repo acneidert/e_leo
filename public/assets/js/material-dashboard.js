@@ -311,29 +311,28 @@ md = {
     $sidebar_wrapper = $('.sidebar-wrapper');
 
     if (!mobile_menu_initialized) {
-      console.log('intra');
-      $navbar = $('nav').find('.navbar-collapse').children('.navbar-nav');
+      // $navbar = $('nav').find('.navbar-collapse').children('.navbar-nav');
 
-      mobile_menu_content = '';
+      // mobile_menu_content = '';
 
-      nav_content = $navbar.html();
+      // nav_content = $navbar.html();
 
-      nav_content = '<ul class="nav navbar-nav nav-mobile-menu">' + nav_content + '</ul>';
+      // nav_content = '<ul class="nav navbar-nav nav-mobile-menu">' + nav_content + '</ul>';
 
-      navbar_form = $('nav').find('.navbar-form').length != 0 ? $('nav').find('.navbar-form')[0].outerHTML : null;
+      // navbar_form = $('nav').find('.navbar-form').length != 0 ? $('nav').find('.navbar-form')[0].outerHTML : null;
 
-      $sidebar_nav = $sidebar_wrapper.find(' > .nav');
+      // $sidebar_nav = $sidebar_wrapper.find(' > .nav');
 
-      // insert the navbar form before the sidebar list
-      $nav_content = $(nav_content);
-      $navbar_form = $(navbar_form);
-      $nav_content.insertBefore($sidebar_nav);
-      $navbar_form.insertBefore($nav_content);
+      // // insert the navbar form before the sidebar list
+      // $nav_content = $(nav_content);
+      // $navbar_form = $(navbar_form);
+      // $nav_content.insertBefore($sidebar_nav);
+      // $navbar_form.insertBefore($nav_content);
 
-      $(".sidebar-wrapper .dropdown .dropdown-menu > li > a").click(function(event) {
-        event.stopPropagation();
+      // $(".sidebar-wrapper .dropdown .dropdown-menu > li > a").click(function(event) {
+      //   event.stopPropagation();
 
-      });
+      // });
 
       // simulate resize so all the charts/maps will be redrawn
       window.dispatchEvent(new Event('resize'));
@@ -343,7 +342,7 @@ md = {
       if ($(window).width() > 991) {
         // reset all the additions that we made for the sidebar wrapper only if the screen is bigger than 991px
         $sidebar_wrapper.find('.navbar-form').remove();
-        $sidebar_wrapper.find('.nav-mobile-menu').remove();
+        // $sidebar_wrapper.find('.nav-mobile-menu').remove();
 
         mobile_menu_initialized = false;
       }

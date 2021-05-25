@@ -33,7 +33,7 @@ class Pagination extends Nullstack {
     return (
       <div class="form-group row">
         <div class="font-weight-light col-12 justify-content-center align-items-center d-flex justify-content-end">
-          <span class="pr-2">
+          <span class="pr-2 d-none d-md-block">
             Página : {this.page} / {totalPages} - {total}
           </span>
 
