@@ -45,9 +45,7 @@ class SelectDefault extends Nullstack {
     });
   }
 
-  handleSearch({ event, value } ) {
-    /* TODO: prevent submit on enter Key */
-    console.log(event)
+  handleSearch({ event } ) {
     clearTimeout(this.timer_search);
     this.timer_search = setTimeout(() => {
       this.getRows();
@@ -57,9 +55,7 @@ class SelectDefault extends Nullstack {
       event.preventDefault();
       clearTimeout(this.timer_search);
       this.getRows();
-      return false;
     }
-    return true;
   }
 
   terminate() {
@@ -146,16 +142,14 @@ class SelectDefault extends Nullstack {
                       <p class="card-category">Clique para selecionar</p>
                     </div>
                     <div class="col-md-8 float-right">
-                      {/* <form onsubmit={this.getRows}> */}
                       <div class="form-row">
                         <Input
+                          default
                           name="Buscar"
                           bind={this.search}
-                          // onchange={this.handleSearch}
-                          oninput={this.handleSearch}
+                          onkeydown={this.handleSearch}
                         />
                       </div>
-                      {/* </form> */}
                     </div>
                   </div>
                 </div>
