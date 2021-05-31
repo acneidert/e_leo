@@ -18,7 +18,7 @@ class Table extends Nullstack {
   render({ columns = [], data = [], reference = '' }) {
     return (
       <div class="table-responsive text-nowrap">
-        <table class="table table-bordered table-sm table-hover">
+        <table class="table table-bordered table-hover">
           <thead>
             <tr>
               {columns.map((column) => (

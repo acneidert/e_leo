@@ -33,6 +33,7 @@ class SelectDefault extends Nullstack {
     data.display = '';
     onchange({ value, data });
   }
+  
   buildSearch() {
     return this.columns.map((column) => {
       return column.name;
@@ -90,7 +91,6 @@ class SelectDefault extends Nullstack {
 
   async initiate({ value, related_field = 'id', display_field = 'id' }) {
     const ret = await this.getById({ id: value, model: this.model });
-    // console.log(ret);
     if (ret) {
       this.selected_description = ret.dataValues[display_field];
       this.selected_value = ret.dataValues[related_field];

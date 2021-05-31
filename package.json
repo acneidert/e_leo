@@ -10,6 +10,7 @@
   },
   "scripts": {
     "start": "npx webpack --config node_modules/nullstack/webpack.config.js --mode=development --watch",
+    "debugStart": "npx webpack info --config node_modules/nullstack/webpack.config.js --mode=development --watch",
     "build": "npx webpack --config node_modules/nullstack/webpack.config.js --mode=production"
   },
   "dependencies": {
@@ -17,7 +18,9 @@
     "bootstrap": "^5.0.0",
     "date-and-time": "^1.0.0",
     "express-session": "^1.17.1",
+    "lipo": "^2.0.0",
     "mariadb": "^2.5.3",
+    "mime": "^2.5.2",
     "mysql2": "^2.2.5",
     "pg-hstore": "^2.3.3",
     "sequelize": "^6.6.2",

@@ -148,9 +148,6 @@ class DatePicker extends Nullstack {
       mask: dateMask(),
     });
   }
-  terminate() {
-    Mask.destroy();
-  }
 
   parse({ event, onchange }) {
     var v = event.target.value;

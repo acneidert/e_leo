@@ -54,10 +54,10 @@ class FormDefault extends Nullstack {
     return await database.models[model].findOne({ where: { id: id } });
   }
 
-  renderForm({ children }) {
+  renderForm({ children, enctype='' }) {
     return (
       <CardDefault title={`${this.getModoInfi()} ${this.form_description}`} link_back={this.getLinkList()}>
-        <form onsubmit={this.handleSubmit}>
+        <form onsubmit={this.handleSubmit} enctype={enctype}>
           <div class="form-row">{children}</div>
           <button type="submit" class="btn btn-primary">
             Salvar

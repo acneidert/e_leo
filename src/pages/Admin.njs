@@ -15,6 +15,7 @@ class Admin extends Nullstack {
     { name: 'Dashboard', icon: 'las la-home', to: '/' },
     { name: 'Campanha', icon: 'las la-heart', to: '/campanha' },
     { name: 'Reunião', icon: 'las la-business-time', to: '/reuniao' },
+    { name: 'Arquivos', icon: 'las la-folder-open', to: '/files' },
     { name: 'Ano Leoístico', icon: 'las la-paw', to: '/ano_leoistico' },
     { name: 'Status Campanhas', icon: 'las la-tag', to: '/status_campanha' },
     { name: 'Status Tarefas', icon: 'las la-tag', to: '/status_tarefas' },

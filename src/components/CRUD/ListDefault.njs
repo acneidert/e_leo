@@ -82,12 +82,12 @@ class ListDefault extends Nullstack {
   }
 
   getLinkAdd() {
-    if (typeof this.link_add === 'undefined') return `/${this.model}/add`;
+    if (typeof this.link_add === 'undefined') return `${this.model}/add`;
     return this.link_add;
   }
 
   getLinkEdit() {
-    if (typeof this.link_edit === 'undefined') return `/${this.model}/edit`;
+    if (typeof this.link_edit === 'undefined') return `${this.model}/edit`;
     return this.link_add;
   }
 

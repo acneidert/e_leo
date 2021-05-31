@@ -27,6 +27,8 @@ import ListReuniao from './pages/reuniao/ListReuniao.njs';
 import FormReuniao from './pages/reuniao/FormReuniao.njs';
 import ListCampanha from './pages/campanhas/ListCampanha.njs';
 import FormCampanha from './pages/campanhas/FormCampanha.njs';
+import ListFiles from './pages/files/ListFiles.njs';
+import FormFiles from './pages/files/FormFiles.njs';
 
 class Application extends Nullstack {
   isDark = false;
@@ -139,7 +141,7 @@ class Application extends Nullstack {
         <Footer />
         <Notification key="notification" />
         {/* {!me && <Login route="/" />} */}
-        {worker.fetching && <Loading />}
+        {/* {worker.fetching && <Loading />} */}
         {/* {me && ( */}
         <Admin>
           {/* {this.test_value} */}
@@ -176,6 +178,10 @@ class Application extends Nullstack {
           <ListCampanha route="/campanha"/>
           <FormCampanha route="/campanha/add"/>
           <FormCampanha route="/campanha/edit/:id"/>
+
+          <ListFiles route="/files" />
+          <FormFiles route="/files/add" />
+          <FormFiles route="/files/edit/:id" />
         </Admin>
         {/* )} */}
         {/* <Error route="*" /> */}
