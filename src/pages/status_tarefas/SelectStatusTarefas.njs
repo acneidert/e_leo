@@ -1,6 +1,6 @@
-import SelectDefault from '../../components/CRUD/SelectDefault.njs';
+import Select from '../../components/CRUD/Select.njs';
 
-class SelectStatusTarefas extends SelectDefault {
+class SelectStatusTarefas extends Select {
   search_description = 'Status Tarefas';
   model = 'status_tarefas';
   columns = [

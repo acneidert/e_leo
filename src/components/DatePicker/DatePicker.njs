@@ -82,23 +82,25 @@ class DatePicker extends Nullstack {
   }
 
   setSelectedDate({ date = null }) {
+    // console.log(date)
     if (typeof date === 'string' && dateUtil.isValid(date, this.format)) {
       this.selected_date = dateUtil.parse(date, this.format, true);
       this.show_date = this.selected_date;
       return;
     }
-    if (date instanceof Date) {
+    if (date instanceof Date && isFinite(date)) {
       this.selected_date = date;
       this.show_date = date;
       return;
     }
-    this.selected_date = null;
+    this.selected_date = '';
     this.show_date = new Date();
     return;
   }
 
   getDateStr() {
-    if (this.selected_date instanceof Date) {
+    if (this.selected_date instanceof Date && isFinite(this.selected_date)) {
+      // console.log('isInscance of Date', this.selected_date);
       return dateUtil.format(this.selected_date, 'DD/MM/YYYY', true);
     }
     return '';
@@ -116,6 +118,7 @@ class DatePicker extends Nullstack {
   prepare({}) {
     this.id = uuidv4();
     this.setSelectedDate();
+    this.show_date = new Date();
   }
 
   setDate({ data, onchange }) {
@@ -137,6 +140,7 @@ class DatePicker extends Nullstack {
   }
 
   initiate({ value = '' }) {
+    // console.log(value)
     this.setSelectedDate({ date: value, format: this.format });
     this.generateCalendar();
   }
@@ -151,6 +155,7 @@ class DatePicker extends Nullstack {
 
   parse({ event, onchange }) {
     var v = event.target.value;
+    // console.log(v);
     if (v.replaceAll('_').length === this.format.length) {
       if (dateUtil.isValid(v, this.format)) {
         this.setDate({ data: { value: v }, onchange });

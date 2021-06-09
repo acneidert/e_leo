@@ -6,7 +6,13 @@ const DataTypes = Sequelize.DataTypes;
 export default function (sequelizeClient) {
   const lideresCampanha = sequelizeClient.define(
     "lideres_campanha",
-    {},
+    {
+      id: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true,
+      }
+    },
     {
       hooks: {
         beforeCount(options) {

@@ -48,7 +48,7 @@ export default function (sequelizeClient) {
     // Define associations here
     // See http://docs.sequelizejs.com/en/latest/docs/associations/
     campanha.belongsTo(models.tenant);
-    campanha.belongsTo(models.status_campanha);
+    campanha.belongsTo(models.status_campanha, {constraints: false});
   };
 
   return campanha;

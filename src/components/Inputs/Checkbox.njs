@@ -5,6 +5,7 @@ export function Checkbox({
     source,
     bind,
     disabled = false,
+    checked = false
   }) {
     const idUuidv4 = uuidv4();
     const nameId = name.toLocaleLowerCase();
@@ -22,6 +23,7 @@ export function Checkbox({
               bind={bind}
               source={source}
               disabled={disabled}
+              checked={checked}
             />
             {name}
             <span class="form-check-sign">

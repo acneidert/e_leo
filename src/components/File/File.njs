@@ -22,7 +22,6 @@ class File extends Nullstack {
   async openModal({ id, instances }) {
     if (!this.loaded) return;
     instances[`file${id}`].show();
-    console.log(data);
   }
 
   closeModal({ instances }) {
@@ -36,8 +35,7 @@ class File extends Nullstack {
   async hydrate({ filename_disk }) {
     this.src = await this.getFile({ filename: filename_disk });
     this.loaded = true;
-    console.log('teste');
-  }
+s  }
 
   render({ id, title }) {
     return (

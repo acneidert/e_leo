@@ -1,11 +1,12 @@
 import Nullstack from 'nullstack';
 import { paginate } from '../../util/paginate';
 import { queryBuilder } from '../../util/queryBuilder';
+import { Checkbox } from '../Inputs/Checkbox.njs';
 import { Input } from '../Inputs/Input.njs';
 import Pagination from '../Pagination/Pagination.njs';
-import './SelectDefault.scss';
+import './SelectMany.scss';
 
-class SelectDefault extends Nullstack {
+class SelectMany extends Nullstack {
   /* Podem Ser Alterado*/
   model = null;
   columns = [];
@@ -16,8 +17,8 @@ class SelectDefault extends Nullstack {
   /*Evitar de Ser alterado*/
   timer_search = null;
   search = null;
-  selected_description = '';
-  selected_value = '';
+  selected_description = [];
+  selected_value = [];
   pagination = null;
 
   prepare({ model, columns, data, total, search_description }) {
@@ -28,26 +29,37 @@ class SelectDefault extends Nullstack {
     this.search_description = search_description;
   }
 
+
+  getSelectedDesc() {
+    return this.selected_description.join(', ');
+  }
+
   setValue({ data, onchange }) {
-    this.selected_value = data.value;
-    this.selected_description = data.display;
-    const value = data.value;
-    onchange({ value, data });
+    if (this.selected_value.includes(data.value)) {
+      const idx = this.selected_value.findIndex((el) => el === data.value);
+      this.selected_value.splice(idx, 1);
+      this.selected_description.splice(idx, 1);
+    } else {
+      this.selected_value.push(data.value);
+      this.selected_description.push(data.display);
+    }
+    const value = _.cloneDeep(this.selected_value);
+    onchange({ value, onchange });
   }
 
   cancelSelect({ onchange, data }) {
-    this.selected_description = '';
+    this.selected_description = [];
     const value = null;
-    data.display = '';
+    data.display = [];
     onchange({ value, data });
   }
-  
+
   buildSearch() {
     return this.columns.map((column) => {
       return column.name;
     });
   }
-  
+
   static async getAll({ database, model, pagination = null, search = null }) {
     return await database.models[model].findAndCountAll({
       ...queryBuilder(search),
@@ -94,19 +106,21 @@ class SelectDefault extends Nullstack {
   }
 
   static async getById({ id, model, database }) {
-    return await database.models[model].findOne({ where: { id: id } });
+    return await database.models[model].findAll({ where: { id: id } });
   }
 
   async initiate({ value, related_field = 'id', display_field = 'id' }) {
-    if(value === undefined) value = '';
+    if(value === undefined) value = [];
     const ret = await this.getById({ id: value, model: this.model });
     if (ret) {
-      this.selected_description = ret.dataValues[display_field];
-      this.selected_value = ret.dataValues[related_field];
+      ret.forEach((row) => {
+        this.selected_value.push(row[related_field]);
+        this.selected_description.push(row[display_field]);
+      });
     }
   }
 
-  render({related_field = 'id', display_field = 'id',  size = 12 }) {
+  render({ source, bind, related_field = 'id', display_field = 'id',  size = 12 }) {
     return (
       <div class={`form-group col-md-${size} bmd-form-group is-filled`}>
         <div class="input-group">
@@ -124,8 +138,7 @@ class SelectDefault extends Nullstack {
           <input
             name={this.search_description}
             size
-            value={this.selected_description}
-            bind={this.selected_description}
+            value={this.getSelectedDesc()}
             type="text"
             class="form-control pl-2"
             id={`search-${this.model}`}
@@ -167,6 +180,7 @@ class SelectDefault extends Nullstack {
                     <table class="table table-bordered table-sm table-hover">
                       <thead>
                         <tr>
+                          <th></th>
                           {this.columns.map((column) => (
                             <th>{column.header}</th>
                           ))}
@@ -179,14 +193,17 @@ class SelectDefault extends Nullstack {
                               onclick={this.setValue}
                               data-value={dataRow[related_field]}
                               data-display={dataRow[display_field]}
-                              class={
-                                this.selected_value === dataRow[related_field]
-                                  ? 'table-primary'
-                                  : ''
-                              }
                             >
+                              <td>
+                                {' '}
+                                <Checkbox
+                                  checked={this.selected_value.includes(
+                                    dataRow[related_field]
+                                  )}
+                                />{' '}
+                              </td>
                               {this.columns.map((column) => (
-                                <td> {dataRow[column.name]}</td>
+                                <td> {dataRow[column.name]} </td>
                               ))}
                             </tr>
                           );
@@ -210,12 +227,6 @@ class SelectDefault extends Nullstack {
                   >
                     Limpar
                   </button>
-                  {/* <button
-                    type="button"
-                    class="btn btn-secondary"
-                  >
-                    Adicionar
-                  </button> */}
                   <button
                     type="button"
                     class="btn btn-primary"
@@ -233,4 +244,4 @@ class SelectDefault extends Nullstack {
   }
 }
 
-export default SelectDefault;
+export default SelectMany;

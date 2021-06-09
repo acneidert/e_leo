@@ -21,6 +21,7 @@ class FormUser extends Nullstack {
   avatar = '';
 
   async initiate({params}){
+      console.log('Here')
       const user = await this.getById({id: params.id})
       
       if(user){

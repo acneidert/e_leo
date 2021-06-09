@@ -22,7 +22,7 @@ export default function (sequelizeClient) {
         allowNull: false,
         set(value) {
           if(value === null || value === '')  return;
-          const hash = bcrypt.hashSync(value, 17);
+          const hash = bcrypt.hashSync(value, 6);
           this.setDataValue('password', hash);
         },
       },

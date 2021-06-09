@@ -2,16 +2,23 @@ import Nullstack from 'nullstack';
 import toParam from '../../util/toParam';
 import { CardDefault } from '../Card/CardDefault.njs';
 import _ from 'lodash';
+import { queryRelated } from '../../util/queryRelated';
 
 class FormDefault extends Nullstack {
   model = '';
   form_description = '';
-  link_list = undefined
+  link_list = undefined;
+  related = [];
 
   async initiate({ params }) {
-    const ret = await this.getById({ id: params.id, model: this.model });
+    const ret = await this.getById({
+      id: params.id,
+      model: this.model,
+      related: this.related,
+    });
     if (ret) {
-      _.forOwn(ret.dataValues, (value, key) => {
+      console.log(ret);
+      _.forOwn(ret, (value, key) => {
         // Just get Class values
         if (_.has(this, key)) _.set(this, key, value);
       });
@@ -50,13 +57,21 @@ class FormDefault extends Nullstack {
     return await database.models[model].upsert(value);
   }
 
-  static async getById({ id, model, database }) {
-    return await database.models[model].findOne({ where: { id: id } });
+  static async getById({ id, model, database, related = null }) {
+    return await database.models[model].findOne({
+      where: { id: id },
+      ...queryRelated({ related, database }),
+      raw: true,
+      nest: true,
+    });
   }
 
-  renderForm({ children, enctype='' }) {
+  renderForm({ children, enctype = '' }) {
     return (
-      <CardDefault title={`${this.getModoInfi()} ${this.form_description}`} link_back={this.getLinkList()}>
+      <CardDefault
+        title={`${this.getModoInfi()} ${this.form_description}`}
+        link_back={this.getLinkList()}
+      >
         <form onsubmit={this.handleSubmit} enctype={enctype}>
           <div class="form-row">{children}</div>
           <button type="submit" class="btn btn-primary">

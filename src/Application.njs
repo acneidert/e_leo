@@ -10,7 +10,7 @@ import Login from './pages/auth/Login';
 import Admin from './pages/Admin';
 import Error from './Error';
 
-import FormUser from './pages/user/FormUser';
+import FormUser from './pages/user/FormUser.njs';
 import Dashboard from './pages/dashboard/Dashboard.njs';
 import ListUsers from './pages/user/ListUsers.njs';
 import { Loading } from './components/Loading/Loading.njs';
@@ -152,7 +152,7 @@ class Application extends Nullstack {
           <Dashboard route="/" />
 
           <ListUsers route="/user" />
-          <FormUser route="/user/add/" />
+          <FormUser route="/user/add" />
           <FormUser route="/user/edit/:id" />
 
           <ListAnoLeoistico route="/ano_leoistico" />

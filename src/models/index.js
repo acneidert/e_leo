@@ -77,8 +77,9 @@ function initModels(database) {
     user_tenants.associate(models)
     users.associate(models)
 
-    
-    database.sync({force: false});
+    // database.sync({alter: true});
+    // console.info('Database Started!')
+    // database.sync({force: false});
     return models;
 }
 export default initModels;
