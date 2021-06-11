@@ -5,6 +5,7 @@ import { Input } from '../../components/Inputs/Input.njs';
 class FormUser extends FormDefault {
   model = 'users';
   form_description = 'Cadastro de Usuários';
+
   id = 0;
   name = '';
   email = '';
@@ -49,6 +50,7 @@ class FormUser extends FormDefault {
       instances.notification.newError({ message: 'Email inválido' });
       return;
     }
+    
     await super.handleSubmit(context);
 
     this.password = '';

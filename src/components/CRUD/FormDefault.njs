@@ -2,7 +2,7 @@ import Nullstack from 'nullstack';
 import toParam from '../../util/toParam';
 import { CardDefault } from '../Card/CardDefault.njs';
 import _ from 'lodash';
-import { queryRelated } from '../../util/queryRelated';
+import { createRelated, queryRelated } from '../../util/queryRelated';
 import toJson from '../../util/toJson';
 
 class FormDefault extends Nullstack {
@@ -77,13 +77,26 @@ class FormDefault extends Nullstack {
   }) {
     const transaction = await database.transaction();
     var retModel = [null, null];
+    console.log(database.models.users);
     try {
       var newOrUpdate = undefined;
       if (isNew) {
         delete value[id_field];
-        newOrUpdate = await database.models[model].create(value, {
+        newOrUpdate = await database.models[model].build(value, {
           transaction,
         });
+        console.log(newOrUpdate);
+        if (related instanceof Array) {
+          related.map((relate) => {
+              // database.models[relate.model].find();
+              // await database.models[model].set('')
+              newOrUpdate.set(relate.model, value[relate.model])
+          });
+        }
+        console.log(newOrUpdate);
+        newOrUpdate.save();
+
+
       } else {
         const where = {};
         where[id_field] = value[id_field];
@@ -92,13 +105,10 @@ class FormDefault extends Nullstack {
           where: where,
           transaction,
         });
+
+
       }
 
-      // if (related instanceof Array) {
-      //   related.map((relate) => {
-      //     database.models[relate.model].find();
-      //   });
-      // }
       
       retModel = [newOrUpdate, true]
       await transaction.commit();
@@ -106,8 +116,6 @@ class FormDefault extends Nullstack {
       console.error(error)
       if (transaction) await transaction.rollback();
     }
-
-    // ...queryRelated({ related, database })
     return retModel;
   }
 
