@@ -101,6 +101,7 @@ class ListDefault extends Nullstack {
       </td>
     );
   }
+  
   rendererData({ value }) {
     try {
       return <td>{value.toLocaleDateString('pt-BR', { timeZone: 'UTC' })}</td>;

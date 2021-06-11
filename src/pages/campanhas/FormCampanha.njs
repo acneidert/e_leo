@@ -34,7 +34,7 @@ class FormCampanha extends FormDefault {
           name="Status"
           bind={this.statusCampanhaId}
           display_field="descricao"
-          size={2}
+          size={4}
         />
         <Input name="Pasta" bind={this.pasta} size={6} />
         <Input name="Eixo" bind={this.eixo} size={6} />

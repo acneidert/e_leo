@@ -36,7 +36,7 @@ class ListUsers extends Nullstack {
                     <td>
                       <a
                         class="btn btn-primary"
-                        href={`user/edit/${user.id}`}
+                        href={`users/edit/${user.id}`}
                         role="button"
                       >
                         <i class="las la-edit"></i>

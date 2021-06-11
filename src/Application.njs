@@ -48,7 +48,7 @@ class Application extends Nullstack {
         host: secrets.dbhost,
         dialect: secrets.dbdriver,
         dialectModule: mysql,
-        logging: false,
+        // logging: false,
       }
     );
     initModels(context.database);
@@ -79,7 +79,7 @@ class Application extends Nullstack {
     page.locale = 'pt-BR';
     page.isDark = false;
   }
-
+  
   renderHead() {
     return (
       <head>
@@ -151,9 +151,9 @@ class Application extends Nullstack {
           />
           <Dashboard route="/" />
 
-          <ListUsers route="/user" />
-          <FormUser route="/user/add" />
-          <FormUser route="/user/edit/:id" />
+          <ListUsers route="/users" />
+          <FormUser route="/users/add" />
+          <FormUser route="/users/edit/:id" />
 
           <ListAnoLeoistico route="/ano_leoistico" />
           <FormAnoLeoistico route="/ano_leoistico/add" />

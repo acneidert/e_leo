@@ -1,16 +1,20 @@
-import Nullstack from 'nullstack';
+import FormDefault from '../../components/CRUD/FormDefault.njs';
+import DatePicker from '../../components/DatePicker/DatePicker.njs';
+import { Input } from '../../components/Inputs/Input.njs';
 
-class FormUser extends Nullstack {
+class FormUser extends FormDefault {
+  model = 'users';
+  form_description = 'Cadastro de Usuários';
   id = 0;
   name = '';
   email = '';
-  password = '';
-  reenterpass = '';
+  password = null;
+  reenterpass = null;
   active = true;
   membership_code = '';
   function = null;
-  entry_date = '';
-  birth_date = '';
+  entry_date = null;
+  birth_date = null;
   phone = '';
   street = '';
   number = '';
@@ -20,257 +24,64 @@ class FormUser extends Nullstack {
   federative_unit = '';
   avatar = '';
 
-  async initiate({params}){
-      console.log('Here')
-      const user = await this.getById({id: params.id})
-      
-      if(user){
-          Object.assign(this, user.dataValues);
-          this.password = '';
-          this.reenterpass = '';
-      }
+  async initiate(context){
+    await super.initiate(context)
+    this.password = '';
+    this.reenterpass = '';
   }
 
-  static async getById({id, database}){
-      return await database.models.users.findOne({where:{ id: id}})
+  static async hasEmail({database, email}){
+    return await database.models.users.findOne({where: {email: email}});
   }
 
-  static async saveUser({ database, user }) {
-    return await database.models.users.upsert(user);
-  }
-
-  async handleSubmit({ instances }) {
-    
-    if (this.password !== this.reenterpass) {
-      instances.notification.newError({message: 'Senhas devem ser iguais'});
+  async handleSubmit(context) {
+    const {instances} = context;
+    const hasEmail = await this.hasEmail({email: this.email});
+    console.log(hasEmail);
+    if (this.password !== this.reenterpass ) {
+      instances.notification.newError({ message: 'Senhas devem ser iguais' });
       return;
     }
-    const [newUser, created] = await this.saveUser({
-      user: {
-        id: this.id,
-        name: this.name,
-        email: this.email,
-        password: this.password,
-        reenterpass: this.reenterpass,
-        active: this.active,
-        membership_code: this.membership_code,
-        function: this.function,
-        entry_date: this.entry_date,
-        birth_date: this.birth_date,
-        phone: this.phone,
-        street: this.street,
-        number: this.number,
-        neighborhood: this.neighborhood,
-        postal_code: this.postal_code,
-        city: this.city,
-        federative_unit: this.federative_unit,
-        avatar: this.avatar,
-      },
-    });
-    if (created === null) {
-      instances.notification.newError({message: 'Erro ao criar usuário'});
-    } else {
-      instances.notification.newSuccess({message: 'Usuário criado/alterado com sucesso'});
-      Object.assign(this, newUser);
-      this.password = '';
-      this.reenterpass = '';
+    if(this.email === ''){
+      instances.notification.newError({ message: 'Email inválido' });
+      return;
     }
+    if(this.email === '' || hasEmail ){
+      instances.notification.newError({ message: 'Email inválido' });
+      return;
+    }
+    await super.handleSubmit(context);
+
+    this.password = '';
+    this.reenterpass = ''
   }
 
-  render({worker}) {
-    // const loadingValidSave = !!worker.queues.saveUser.find(args => args.valid);
+
+  render() {
     return (
-      <div class="card">
-        <div class="card-header card-header-primary">
-          <h4 class="card-title">Cadastro de usuário</h4>
-        </div>
-        <div class="card-body">
-          <form onsubmit={this.handleSubmit}>
-            <div class="form-row">
-              <div class="form-group col-md-6">
-                <label for="nome" class="bmd-label-floating">
-                  Nome
-                </label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="nome"
-                  bind={this.name}
-                />
-              </div>
-
-              <div class="form-group col-md-6">
-                <label for="email" class="bmd-label-floating">
-                  Email
-                </label>
-                <input
-                  type="email"
-                  class="form-control"
-                  id="email"
-                  bind={this.email}
-                />
-              </div>
-            </div>
-            <div class="form-row">
-              <div class="form-group col-md-6">
-                <label for="senha" class="bmd-label-floating">
-                  Senha
-                </label>
-                <input
-                  type="password"
-                  class="form-control"
-                  id="senha"
-                  bind={this.password}
-                />
-              </div>
-              <div class="form-group col-md-6">
-                <label for="reenterpass" class="bmd-label-floating">
-                  Digite novamente a Senha
-                </label>
-                <input
-                  type="password"
-                  class="form-control"
-                  id="reenterpass"
-                  bind={this.reenterpass}
-                />
-              </div>
-              <div class="form-group col-md-6">
-                <label for="phone" class="bmd-label-floating">
-                  Telefone
-                </label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="phone"
-                  bind={this.phone}
-                />
-              </div>
-              <div class="form-group col-md-6">
-                <label for="birth_date">Data de Aniversário</label>
-                <input
-                  type="date"
-                  class="form-control"
-                  id="birth_date"
-                  bind={this.birth_date}
-                />
-              </div>
-            </div>
-
-            <p class="h3">Informações do Clube</p>
-            <div class="form-row">
-              <div class="form-group col-md-6">
-                <label for="membership_code" class="bmd-label-floating">
-                  Código de Membro
-                </label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="membership_code"
-                  bind={this.membership_code}
-                />
-              </div>
-              <div class="form-group col-md-6">
-                <label for="entry_date">Data de Entrada</label>
-                <input
-                  type="date"
-                  class="form-control"
-                  id="entry_date"
-                  bind={this.entry_date}
-                />
-              </div>
-              <div class="form-group col-md-12">
-                <label for="function" class="bmd-label-floating">
-                  Função
-                </label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="function"
-                  bind={this.function}
-                />
-              </div>
-            </div>
-
-            <p class="h3">Endereço</p>
-
-            <div class="form-row">
-              <div class="form-group col-md-4">
-                <label for="cep" class="bmd-label-floating">
-                  CEP
-                </label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="cep"
-                  bind={this.postal_code}
-                />
-              </div>
-
-              <div class="form-group col-md-4">
-                <label for="street" class="bmd-label-floating">
-                  Rua
-                </label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="street"
-                  bind={this.street}
-                />
-              </div>
-              <div class="form-group col-md-4">
-                <label for="number" class="bmd-label-floating">
-                  Número
-                </label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="number"
-                  bind={this.number}
-                />
-              </div>
-
-              <div class="form-group col-md-4">
-                <label for="neighborhood" class="bmd-label-floating">
-                  Bairro
-                </label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="neighborhood"
-                  bind={this.neighborhood}
-                />
-              </div>
-
-              <div class="form-group col-md-6">
-                <label for="city" class="bmd-label-floating">
-                  Cidade
-                </label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="city"
-                  bind={this.city}
-                />
-              </div>
-              <div class="form-group col-md-2">
-                <label for="federative_unit" class="bmd-label-floating">
-                  UF
-                </label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="federative_unit"
-                  bind={this.federative_unit}
-                />
-              </div>
-            </div>
-
-            <button type="submit" class="btn btn-primary" >
-              Salvar
-            </button>
-          </form>
-        </div>
-      </div>
+      <Form>
+        <Input name="Nome" bind={this.name} size={6} />
+        <Input name="E-mail" bind={this.email} type="email" size={6} />
+        <Input name="Senha" bind={this.password} type="password" size={6} />
+        <Input name="Digite a Senha novamente" bind={this.reenterpass} type="password" size={6} />
+        <Input name="Telefone" bind={this.phone} size={6} />
+        <DatePicker name="Data de Aniversário" bind={this.birth_date} size={6} />
+        {/* <br />
+        <h3>Informações do Clube</h3>
+        <br /> */}
+        <Input name="Código de Membro" bind={this.membership_code} size={6} />
+        <DatePicker name="Data de Entrada" bind={this.entry_date} size={6} />
+        <Input name="Função" bind={this.function} size={12} />
+        {/* <br />
+        <h3>Endereço</h3>
+        <br /> */}
+        <Input name="CEP" bind={this.postal_code} size={4} />
+        <Input name="Rua" bind={this.street} size={4} />
+        <Input name="Número" bind={this.number} size={4} />
+        <Input name="Bairro" bind={this.neighborhood} size={4} />
+        <Input name="Cidade" bind={this.city} size={6} />
+        <Input name="UF" bind={this.federative_unit} size={2} />
+      </Form>
     );
   }
 }

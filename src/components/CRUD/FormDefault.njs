@@ -9,6 +9,7 @@ class FormDefault extends Nullstack {
   model = '';
   form_description = '';
   link_list = undefined;
+  link_add = undefined;
   related = [];
 
   async initiate({ params }) {
@@ -55,6 +56,13 @@ class FormDefault extends Nullstack {
     if (typeof this.link_list === 'undefined') return `/${this.model}`;
     return this.link_list;
   }
+  
+  getLinkAdd() {
+    if(this.id === 0) return '' 
+    if (typeof this.link_add === 'undefined') return `/${this.model}/add`;
+    return this.link_add;
+  }
+
   static async save({ database, model, value, related = null  }) {
     const retModel = await database.models[model].upsert(
       value,
@@ -77,6 +85,7 @@ class FormDefault extends Nullstack {
       <CardDefault
         title={`${this.getModoInfi()} ${this.form_description}`}
         link_back={this.getLinkList()}
+        link_add={this.getLinkAdd()}
       >
         <form onsubmit={this.handleSubmit} enctype={enctype}>
           <div class="form-row">{children}</div>

@@ -24,7 +24,7 @@ class Admin extends Nullstack {
       icon: 'las la-piggy-bank',
       to: '/fundos_financeiros',
     },
-    { name: 'Usuários', icon: 'las la-user', to: '/user' },
+    { name: 'Usuários', icon: 'las la-user', to: '/users' },
   ];
   async toogleTheme(context) {
     context.event.preventDefault();
