@@ -106,7 +106,6 @@ class SelectMany extends Nullstack {
   }
 
   static async getById({ value, model, database }) {
-    console.log(value)
     return await database.models[model].findAll({ where: { [Op.or]: value } });
   }
 

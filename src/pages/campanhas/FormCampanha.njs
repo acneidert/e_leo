@@ -10,11 +10,11 @@ class FormCampanha extends FormDefault {
 
   id = 0;
   nome = '';
-  pasta = '';
   eixo = '';
-  data_inicio = '';
+  pasta = '';
   data_fim = '';
   objetivo = '';
+  data_inicio = '';
   statusCampanhaId = '';
   lideres_campanhas = [];
   related = [
@@ -22,11 +22,6 @@ class FormCampanha extends FormDefault {
       model: 'lideres_campanha',
     },
   ];
-
-  async handleSubmit(ctx) {
-    console.log(this);
-    await super.handleSubmit(ctx);
-  }
 
   render() {
     return (

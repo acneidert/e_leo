@@ -37,7 +37,6 @@ class FormUser extends FormDefault {
   async handleSubmit(context) {
     const {instances} = context;
     const hasEmail = await this.hasEmail({email: this.email});
-    console.log(hasEmail);
     if (this.password !== this.reenterpass ) {
       instances.notification.newError({ message: 'Senhas devem ser iguais' });
       return;
