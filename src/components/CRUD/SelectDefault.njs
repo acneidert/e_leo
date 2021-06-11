@@ -97,16 +97,16 @@ class SelectDefault extends Nullstack {
     return await database.models[model].findOne({ where: { id: id } });
   }
 
-  async initiate({ value, related_field = 'id', display_field = 'id' }) {
+  async initiate({ value, value_field = 'id', display_field = 'id' }) {
     if(value === undefined) value = '';
     const ret = await this.getById({ id: value, model: this.model });
     if (ret) {
       this.selected_description = ret.dataValues[display_field];
-      this.selected_value = ret.dataValues[related_field];
+      this.selected_value = ret.dataValues[value_field];
     }
   }
 
-  render({related_field = 'id', display_field = 'id',  size = 12 }) {
+  render({value_field = 'id', display_field = 'id',  size = 12 }) {
     return (
       <div class={`form-group col-md-${size} bmd-form-group is-filled`}>
         <div class="input-group">
@@ -177,10 +177,10 @@ class SelectDefault extends Nullstack {
                           return (
                             <tr
                               onclick={this.setValue}
-                              data-value={dataRow[related_field]}
+                              data-value={dataRow[value_field]}
                               data-display={dataRow[display_field]}
                               class={
-                                this.selected_value === dataRow[related_field]
+                                this.selected_value === dataRow[value_field]
                                   ? 'table-primary'
                                   : ''
                               }

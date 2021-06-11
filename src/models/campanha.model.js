@@ -49,6 +49,7 @@ export default function (sequelizeClient) {
     // See http://docs.sequelizejs.com/en/latest/docs/associations/
     campanha.belongsTo(models.tenant);
     campanha.belongsTo(models.status_campanha, {constraints: false});
+    campanha.hasMany(models.lideres_campanha, {constraints: false});
   };
 
   return campanha;

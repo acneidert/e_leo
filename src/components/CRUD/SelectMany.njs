@@ -1,4 +1,5 @@
 import Nullstack from 'nullstack';
+import { Op } from 'sequelize';
 import { paginate } from '../../util/paginate';
 import { queryBuilder } from '../../util/queryBuilder';
 import { Checkbox } from '../Inputs/Checkbox.njs';
@@ -29,7 +30,6 @@ class SelectMany extends Nullstack {
     this.search_description = search_description;
   }
 
-
   getSelectedDesc() {
     return this.selected_description.join(', ');
   }
@@ -43,7 +43,7 @@ class SelectMany extends Nullstack {
       this.selected_value.push(data.value);
       this.selected_description.push(data.display);
     }
-    const value = _.cloneDeep(this.selected_value);
+    const value = this.returnValue();
     onchange({ value, onchange });
   }
 
@@ -105,22 +105,50 @@ class SelectMany extends Nullstack {
     }
   }
 
-  static async getById({ id, model, database }) {
-    return await database.models[model].findAll({ where: { id: id } });
+  static async getById({ value, model, database }) {
+    console.log(value)
+    return await database.models[model].findAll({ where: { [Op.or]: value } });
   }
 
-  async initiate({ value, related_field = 'id', display_field = 'id' }) {
-    if(value === undefined) value = [];
-    const ret = await this.getById({ id: value, model: this.model });
+  formatedValue({ value, value_field = 'id', related_field = 'id' }) {
+    const formated = value.map((val) => {
+      const temp = {};
+      temp[value_field] = val[related_field];
+      return temp;
+    });
+    return formated;
+  }
+
+  returnValue({related_field = 'id' }){
+    const formated = this.selected_value.map((val) => {
+      const temp = {};
+      temp[related_field] = val;
+      return temp;
+    });
+    return formated;
+  }
+
+  async initiate({ value, value_field = 'id', display_field = 'id' }) {
+    if (value === undefined) value = [];
+    const ret = await this.getById({
+      value: this.formatedValue(),
+      model: this.model,
+    });
     if (ret) {
       ret.forEach((row) => {
-        this.selected_value.push(row[related_field]);
+        this.selected_value.push(row[value_field]);
         this.selected_description.push(row[display_field]);
       });
     }
   }
 
-  render({ source, bind, related_field = 'id', display_field = 'id',  size = 12 }) {
+  render({
+    source,
+    bind,
+    value_field = 'id',
+    display_field = 'id',
+    size = 12,
+  }) {
     return (
       <div class={`form-group col-md-${size} bmd-form-group is-filled`}>
         <div class="input-group">
@@ -191,14 +219,14 @@ class SelectMany extends Nullstack {
                           return (
                             <tr
                               onclick={this.setValue}
-                              data-value={dataRow[related_field]}
+                              data-value={dataRow[value_field]}
                               data-display={dataRow[display_field]}
                             >
                               <td>
                                 {' '}
                                 <Checkbox
                                   checked={this.selected_value.includes(
-                                    dataRow[related_field]
+                                    dataRow[value_field]
                                   )}
                                 />{' '}
                               </td>

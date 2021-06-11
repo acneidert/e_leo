@@ -26,8 +26,8 @@ export default function (sequelizeClient) {
   lideresCampanha.associate = function (models) {
     // Define associations here
     // See http://docs.sequelizejs.com/en/latest/docs/associations/
-    models.users.belongsToMany(models.campanha, { through: lideresCampanha });
-    models.campanha.belongsToMany(models.users, { through: lideresCampanha });
+    lideresCampanha.belongsTo(models.users, {constraints: false});
+    lideresCampanha.belongsTo(models.campanha, {constraints: false});
     lideresCampanha.belongsTo(models.tenant);
   };
 

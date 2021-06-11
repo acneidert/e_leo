@@ -16,14 +16,10 @@ class FormCampanha extends FormDefault {
   data_fim = '';
   objetivo = '';
   statusCampanhaId = '';
-  // users = [20,23];
+  lideres_campanhas = [];
   related = [
     {
-      model: 'users',
-      attributes: ['id'],
-      through: {
-        attributes: [],
-      },
+      model: 'lideres_campanha',
     },
   ];
    async handleSubmit(ctx){
@@ -47,9 +43,10 @@ class FormCampanha extends FormDefault {
         <Input name="Objetivo" bind={this.objetivo} />
         Líderes de Campanha
         <SelectUsers
-          bind={this.users}
+          bind={this.lideres_campanhas}
           name="Lideres de Campanha"
           display_field="name"
+          related_field="userId"
           multiple
         />
       </Form>

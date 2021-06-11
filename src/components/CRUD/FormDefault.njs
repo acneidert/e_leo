@@ -3,6 +3,7 @@ import toParam from '../../util/toParam';
 import { CardDefault } from '../Card/CardDefault.njs';
 import _ from 'lodash';
 import { queryRelated } from '../../util/queryRelated';
+import toJson from '../../util/toJson';
 
 class FormDefault extends Nullstack {
   model = '';
@@ -36,6 +37,7 @@ class FormDefault extends Nullstack {
     const [newObj, created] = await this.save({
       value: toParam({ ...this }),
       model: this.model,
+      related: this.related,
     });
     if (created === null) {
       instances.notification.newError({
@@ -53,17 +55,21 @@ class FormDefault extends Nullstack {
     if (typeof this.link_list === 'undefined') return `/${this.model}`;
     return this.link_list;
   }
-  static async save({ database, model, value }) {
-    return await database.models[model].upsert(value);
+  static async save({ database, model, value, related = null  }) {
+    const retModel = await database.models[model].upsert(
+      value,
+      {...queryRelated({ related, database })}
+    );
+    return retModel;
   }
 
   static async getById({ id, model, database, related = null }) {
-    return await database.models[model].findOne({
-      where: { id: id },
-      ...queryRelated({ related, database }),
-      raw: true,
-      nest: true,
-    });
+    return toJson(
+      await database.models[model].findOne({
+        where: { id: id },
+        ...queryRelated({ related, database }),
+      })
+    );
   }
 
   renderForm({ children, enctype = '' }) {

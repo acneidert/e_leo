@@ -13,6 +13,7 @@ class Select extends Nullstack {
     multiple = false,
     bind,
     source,
+    value_field = 'id',
     related_field = 'id',
     display_field = 'id',
     size = 12,
@@ -25,6 +26,7 @@ class Select extends Nullstack {
             size={size}
             bind={bind}
             source={source}
+            value_field={value_field}
             related_field={related_field}
             display_field={display_field}
           />
@@ -35,6 +37,7 @@ class Select extends Nullstack {
             size={size}
             bind={bind}
             source={source}
+            value_field={value_field}
             related_field={related_field}
             display_field={display_field}
           />
