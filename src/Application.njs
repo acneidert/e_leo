@@ -39,6 +39,10 @@ class Application extends Nullstack {
   }
 
   static async startDatabase(context) {
+    /* ideia para multi tenant 
+      instanciar outro databasetenant que sera responsavel, 
+      ao login de se adequar aos valores   
+    */
     const { secrets } = context;
     context.database = new Sequelize(
       secrets.database,

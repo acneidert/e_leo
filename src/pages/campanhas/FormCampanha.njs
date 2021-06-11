@@ -22,10 +22,12 @@ class FormCampanha extends FormDefault {
       model: 'lideres_campanha',
     },
   ];
-   async handleSubmit(ctx){
-     console.log(this);
-     await super.handleSubmit(ctx);
-   }
+
+  async handleSubmit(ctx) {
+    console.log(this);
+    await super.handleSubmit(ctx);
+  }
+
   render() {
     return (
       <Form>

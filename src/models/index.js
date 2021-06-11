@@ -16,7 +16,14 @@ import startTarefasCampanhas from './tarefas_campanhas.model';
 import startTipoMovimentacao from './tipo_movimentacao.model';
 import startUserTenants from './user_tenants.model';
 import startUsers from './users.model';
+function initModelsRoot(database){
+  //TODO transfer tenant, users, user_tenants here
+}
+function initModelsTenant(database){
+  //TODO transfer all of others models
+} 
 function initModels(database) {
+  // this will call both
   const tenant = startTenant(database);
   const users = startUsers(database);
   const user_tenants = startUserTenants(database);
@@ -81,6 +88,13 @@ function initModels(database) {
   // database.sync({ force: false });
   return models;
 }
+
 export default initModels;
+
+// export default init = {
+//   initModels, 
+//   initModelsRoot, 
+//   initModelsTenant
+// };
 // module.exports.initModels = initModels;
 // module.exports.default = initModels;
